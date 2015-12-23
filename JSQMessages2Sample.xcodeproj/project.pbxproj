@@ -50,6 +50,7 @@
 		BA5FA0D71C284E2300ED32F2 /* JSQMessages2SampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JSQMessages2SampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA5FA0DB1C284E2300ED32F2 /* JSQMessages2SampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSQMessages2SampleUITests.swift; sourceTree = "<group>"; };
 		BA5FA0DD1C284E2300ED32F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA8903681C2858B300FFE771 /* JSQMessages2Sample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JSQMessages2Sample-Bridging-Header.h"; sourceTree = "<group>"; };
 		E2251D97800906E46C90E566 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -105,6 +106,7 @@
 				BA5FA0B91C284E2300ED32F2 /* Products */,
 				29CDBA1000B0EEBB868C6B9A /* Pods */,
 				9CEB2D895CCB5B2431AC321A /* Frameworks */,
+				BA8903681C2858B300FFE771 /* JSQMessages2Sample-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -426,7 +428,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -465,7 +467,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -478,10 +480,13 @@
 			baseConfigurationReference = 2A84CF597B763737EC939697 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = JSQMessages2Sample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = red.itvirtuoso.JSQMessages2Sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "JSQMessages2Sample-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -490,10 +495,12 @@
 			baseConfigurationReference = B8E5B4708C31A444C9F6429E /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = JSQMessages2Sample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = red.itvirtuoso.JSQMessages2Sample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "JSQMessages2Sample-Bridging-Header.h";
 			};
 			name = Release;
 		};
