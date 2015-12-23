@@ -40,18 +40,13 @@ class ViewController: JSQMessagesViewController {
             "https://upload.wikimedia.org/wikipedia/commons/d/d0/07_Akaishidake_from_Hijiridake_2001-9-25.jpg",
             "https://upload.wikimedia.org/wikipedia/commons/6/63/08_Okuhotaka_Karasawa_Kitahotakadake_from_Cyogatake_2001-11-23.jpg",
             "https://upload.wikimedia.org/wikipedia/commons/7/7a/09_Kitahotaka_and_Okuhotakadake_from_Nishidake_2000-8-16.jpg",
-            "https://upload.wikimedia.org/wikipedia/commons/f/f2/10_Oobamidake_from_Yarigatake_2003-10-5.jpg"
+            "https://upload.wikimedia.org/wikipedia/commons/f/f2/10_Oobamidake_from_Yarigatake_2003-10-5.jpg",
+            "https://noimage.com/noimage.png",
         ]
         
         self.messages.append(JSQMessage(senderId: "1", displayName: "user1", media: createPhotoItem(mounts[0], isOutgoing: true)))
-        self.messages.append(JSQMessage(senderId: "1", senderDisplayName: "user1", date: NSDate(), text: "メロスは激怒した。"))
         self.messages.append(JSQMessage(senderId: "2", displayName: "user2", media: createPhotoItem(mounts[1], isOutgoing: false)))
-        self.messages.append(JSQMessage(senderId: "2", senderDisplayName: "user2", date: NSDate(), text: "必ず、かの邪智暴虐（じゃちぼうぎゃく）の王を除かなければならぬと決意した。"))
-        self.messages.append(JSQMessage(senderId: "2", senderDisplayName: "user2", date: NSDate(), text: "メロスには政治がわからぬ。"))
-        self.messages.append(JSQMessage(senderId: "2", senderDisplayName: "user2", date: NSDate(), text: "メロスは、村の牧人である。"))
         self.messages.append(JSQMessage(senderId: "1", displayName: "user1", media: createPhotoItem(mounts[2], isOutgoing: true)))
-        self.messages.append(JSQMessage(senderId: "1", senderDisplayName: "user1", date: NSDate(), text: "笛を吹き、羊と遊んで暮して来た。"))
-        self.messages.append(JSQMessage(senderId: "1", senderDisplayName: "user1", date: NSDate(), text: "けれども邪悪に対しては、人一倍に敏感であった。"))
         self.messages.append(JSQMessage(senderId: "2", displayName: "user2", media: createPhotoItem(mounts[3], isOutgoing: false)))
         self.messages.append(JSQMessage(senderId: "1", displayName: "user1", media: createPhotoItem(mounts[4], isOutgoing: true)))
         self.messages.append(JSQMessage(senderId: "1", displayName: "user1", media: createPhotoItem(mounts[5], isOutgoing: true)))
@@ -59,25 +54,34 @@ class ViewController: JSQMessagesViewController {
         self.messages.append(JSQMessage(senderId: "2", displayName: "user2", media: createPhotoItem(mounts[7], isOutgoing: false)))
         self.messages.append(JSQMessage(senderId: "2", displayName: "user2", media: createPhotoItem(mounts[8], isOutgoing: false)))
         self.messages.append(JSQMessage(senderId: "1", displayName: "user1", media: createPhotoItem(mounts[9], isOutgoing: true)))
+        self.messages.append(JSQMessage(senderId: "1", displayName: "user1", media: createPhotoItem(mounts[10], isOutgoing: true)))
     }
     
     private func createPhotoItem(url: String, isOutgoing: Bool) -> JSQPhotoMediaItem {
-        print("creating photo image url = " + url)
-        guard let nsurl = NSURL(string: url) else {
-            print("invalid url")
-            return JSQPhotoMediaItem()
-        }
-        guard let data = NSData(contentsOfURL: nsurl) else {
-            print("invalid data")
-            return JSQPhotoMediaItem()
-        }
-        guard let image = UIImage(data: data) else {
-            print("invalid image")
-            return JSQPhotoMediaItem()
-        }
-        let photoItem = JSQPhotoMediaItem(image: image)
+        print("creating photo item url = " + url)
+        let photoItem = JSQPhotoMediaItem()
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            photoItem.image = self.createImage(url)
+            dispatch_async(dispatch_get_main_queue(), {
+                self.collectionView?.reloadData()
+            })
+        })
         photoItem.appliesMediaViewMaskAsOutgoing = isOutgoing
         return photoItem
+    }
+    
+    private func createImage(url: String) -> UIImage {
+        print("creating image url = " + url)
+        guard let nsurl = NSURL(string: url) else {
+            return UIImage(named: "noimage")!
+        }
+        guard let data = NSData(contentsOfURL: nsurl) else {
+            return UIImage(named: "noimage")!
+        }
+        guard let image = UIImage(data: data) else {
+            return UIImage(named: "noimage")!
+        }
+        return image
     }
     
     override func didReceiveMemoryWarning() {
